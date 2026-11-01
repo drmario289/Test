@@ -37,7 +37,7 @@
                 </div>
                 <div>
                     <span class="font-bold text-lg text-slateDark tracking-tight">SecureBank Cloud</span>
-                    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full ml-2 border border-slate-200 hidden sm:inline-block">DSR Study Platform</span>
+                    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full ml-2 border border-slate-200 hidden sm:inline-block">Customer Portal v4.2</span>
                 </div>
             </div>
             <div class="flex items-center space-x-3">
@@ -55,70 +55,43 @@
     <!-- Main Container -->
     <main class="flex-grow max-w-4xl w-full mx-auto p-4 sm:p-6 my-auto">
 
-        <!-- SETUP / RESEARCHER CONFIG CARD -->
-        <div id="setup-card" class="bg-white rounded-xl shadow-lg border border-slate-200 p-6 sm:p-8 mb-6 transition-all">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-100 mb-6">
-                <div>
-                    <h1 class="text-xl font-bold text-slateDark">2×2 Factorial Experiment Setup</h1>
-                    <p class="text-sm text-slate-500">Configure participant assignment before starting the simulated onboarding workflow.</p>
-                </div>
-                <div class="mt-3 sm:mt-0">
-                    <span id="current-group-badge" class="px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-800 border border-blue-200">
-                        Group 1: Baseline Control
-                    </span>
-                </div>
+        <!-- TESTER DEBUG GROUP BANNER (Can be removed before study) -->
+        <div id="debug-group-banner" class="bg-indigo-50 border border-indigo-200 rounded-xl p-3 mb-4 text-xs text-indigo-900 flex items-center justify-between shadow-sm">
+            <div class="flex items-center space-x-2">
+                <span class="w-2 h-2 rounded-full bg-indigo-600 animate-pulse"></span>
+                <span class="font-bold">Test Mode (Debug Indicator):</span>
+                <span id="debug-group-text" class="font-semibold">Group 1: Baseline Control</span>
             </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                <!-- Assignment Mode -->
-                <div class="space-y-2">
-                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-500">Assignment Mode</label>
-                    <div class="grid grid-cols-2 gap-2">
-                        <button type="button" id="mode-random" onclick="app.setMode('random')" class="py-2 px-3 text-sm font-medium rounded-lg border border-cyan-600 bg-cyan-600 text-white transition-all shadow-sm">
-                            Randomize (True Study)
-                        </button>
-                        <button type="button" id="mode-manual" onclick="app.setMode('manual')" class="py-2 px-3 text-sm font-medium rounded-lg border border-slate-300 bg-white text-slate-700 hover:bg-slate-50 transition-all">
-                            Manual Selector
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Manual Group Selector (Hidden if Random) -->
-                <div id="manual-selector-container" class="space-y-2 opacity-50 pointer-events-none transition-all">
-                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-500">Select Experimental Group</label>
-                    <select id="manual-group-select" onchange="app.changeManualGroup(this.value)" class="w-full py-2 px-3 text-sm rounded-lg border border-slate-300 bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-cyan-500">
-                        <option value="1">Group 1: Baseline Control (No Info, No Structural)</option>
-                        <option value="2">Group 2: Info Nudge Only</option>
-                        <option value="3">Group 3: Structural Nudges Only</option>
-                        <option value="4">Group 4: Hybrid Condition (Info + Structural)</option>
-                    </select>
-                </div>
-            </div>
-
-            <!-- Condition Breakdown Details -->
-            <div class="bg-slate-50 rounded-lg p-4 border border-slate-200 text-xs sm:text-sm text-slate-600 mb-6 space-y-1">
-                <div class="font-semibold text-slateDark flex items-center">
-                    <svg class="w-4 h-4 mr-1 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    Active Condition Parameters:
-                </div>
-                <p id="condition-desc-info"><span class="font-medium">Information Nudge:</span> Absent (Proceeds directly to MFA)</p>
-                <p id="condition-desc-struct"><span class="font-medium">Structural Nudges:</span> Absent (Standard un-prioritised options, SMS easily selectable)</p>
-            </div>
-
-            <button onclick="app.startExperiment()" class="w-full bg-slateDark hover:bg-slate-800 text-white font-semibold py-3 px-6 rounded-xl shadow-md transition-all flex items-center justify-center space-x-2">
-                <span>Begin Participant Onboarding Workflow</span>
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-            </button>
+            <span class="text-[10px] text-indigo-500 uppercase tracking-wider font-mono">Will be removed before study</span>
         </div>
 
-        <!-- WORKFLOW CONTAINER (Hidden until start) -->
+        <!-- LANDING PAGE / SETUP CARD -->
+        <div id="setup-card" class="bg-white rounded-xl shadow-lg border border-slate-200 p-6 sm:p-8 mb-6 transition-all">
+            <div class="max-w-2xl mx-auto text-center space-y-4 py-4">
+                <div class="w-16 h-16 bg-cyan-100 text-cyan-700 rounded-2xl flex items-center justify-center mx-auto shadow-inner">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                </div>
+                <h1 class="text-2xl sm:text-3xl font-bold text-slateDark">Welcome to SecureBank Cloud</h1>
+                <p class="text-sm sm:text-base text-slate-600 leading-relaxed">
+                    Protect your digital documents and financial assets with our state-of-the-art cloud storage platform. Begin your secure registration now to gain full access to your encrypted online portal.
+                </p>
+                <div class="pt-4">
+                    <button onclick="app.startExperiment()" class="w-full sm:w-auto bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-3 px-8 rounded-xl shadow-md transition-all flex items-center justify-center space-x-2 mx-auto cursor-pointer">
+                        <span>Start Registration</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- WORKFLOW CONTAINER -->
         <div id="workflow-container" class="hidden bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden transition-all">
             
             <!-- Progress Bar Header -->
             <div class="bg-slate-50 px-6 py-3 border-b border-slate-200 flex items-center justify-between">
                 <div class="flex items-center space-x-2">
-                    <span id="step-badge" class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-cyan-100 text-cyan-800">Stage 1 of 4</span>
-                    <span id="step-title" class="text-sm font-semibold text-slateDark">Primary Authentication</span>
+                    <span id="step-badge" class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-cyan-100 text-cyan-800">Step 1 of 4</span>
+                    <span id="step-title" class="text-sm font-semibold text-slateDark">Account Registration</span>
                 </div>
                 <div class="text-xs text-slate-500 font-mono">
                     Timer: <span id="workflow-timer" class="font-bold text-slateDark">0.0s</span>
@@ -128,22 +101,59 @@
             <!-- STAGE 1: Primary Authentication Form -->
             <div id="stage-1" class="p-6 sm:p-8 space-y-6">
                 <div>
-                    <h2 class="text-xl font-bold text-slateDark">Account Registration</h2>
-                    <p class="text-sm text-slate-500">Create your SecureBank cloud storage credentials to initiate service onboarding.</p>
+                    <h2 class="text-xl font-bold text-slateDark">Set Up Your Credentials</h2>
+                    <p class="text-sm text-slate-500">Please provide your details and create a secure master password.</p>
+                </div>
+
+                <!-- Experimental Data Notice -->
+                <div class="bg-blue-50 border border-blue-200 p-3 rounded-lg text-xs text-blue-900 flex items-start space-x-2">
+                    <svg class="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <div>
+                        <span class="font-semibold">Research Study Notice:</span> This is a simulated experiment. Please enter <strong>fictitious data</strong> only (do not use your real personal names, real email addresses, or real phone numbers). Pre-filled dummy values are provided for convenience.
+                    </div>
                 </div>
 
                 <form id="auth-form" onsubmit="app.submitStage1(event)" class="space-y-4 max-w-md">
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">First Name</label>
+                            <input type="text" id="firstname-input" required value="Max" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Last Name</label>
+                            <input type="text" id="lastname-input" required value="Mustermann" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 text-sm">
+                        </div>
+                    </div>
                     <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Username / Email</label>
-                        <input type="text" id="username-input" required value="research_participant@securebank.io" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 text-sm">
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Email Address (Username)</label>
+                        <input type="email" id="email-input" required value="participant_test@securebank.io" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 text-sm">
+                        <p id="email-error" class="text-xs text-rose-600 mt-1 hidden">Please enter a valid email address.</p>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Mobile Phone Number (for SMS/Push)</label>
+                        <input type="tel" id="phone-input" required value="+49 151 98765432" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 text-sm">
                     </div>
                     <div>
                         <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Master Password</label>
-                        <input type="password" id="password-input" required value="SecurePass2026!" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 text-sm">
+                        <input type="password" id="password-input" required placeholder="Enter your password" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 text-sm">
+                        <!-- Password criteria displayed upfront -->
+                        <ul class="text-[11px] text-slate-500 mt-1.5 space-y-0.5 list-disc list-inside bg-slate-50 p-2 rounded border border-slate-200">
+                            <li>At least 10 characters long</li>
+                            <li>Contains at least 1 number</li>
+                            <li>Contains at least 1 special character (e.g. !@#$%^&*)</li>
+                        </ul>
                     </div>
-                    <div class="pt-2">
-                        <button type="submit" class="w-full bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-2.5 px-4 rounded-lg shadow transition-all">
-                            Validate Credentials & Continue
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Confirm Password</label>
+                        <input type="password" id="password-confirm-input" required placeholder="Re-enter password" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 text-sm">
+                        <p id="password-error" class="text-xs text-rose-600 mt-1 hidden">Passwords do not match or do not meet security criteria.</p>
+                    </div>
+                    <div class="pt-2 flex items-center space-x-3">
+                        <button type="button" onclick="app.goBack(1)" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-2.5 px-4 rounded-lg transition-all border border-slate-300 text-sm cursor-pointer">
+                            Back
+                        </button>
+                        <button type="submit" class="flex-grow bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-2.5 px-4 rounded-lg shadow transition-all text-sm cursor-pointer">
+                            Continue Registration
                         </button>
                     </div>
                 </form>
@@ -153,7 +163,7 @@
             <div id="stage-2" class="p-6 sm:p-8 space-y-6 hidden">
                 <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-lg">
                     <div class="flex items-center space-x-2">
-                        <svg class="w-5 h-5 text-amber-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                        <svg class="w-5 h-5 text-amber-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
                         <h3 class="text-base font-bold text-amber-900">Security Notice: SIM-Swapping Threat Disclosure</h3>
                     </div>
                     <p class="text-xs text-amber-700 mt-1">Mandatory risk priming disclosure presented prior to multi-factor setup.</p>
@@ -174,8 +184,11 @@
                     </div>
                 </div>
 
-                <div>
-                    <button onclick="app.completeStage2()" class="w-full bg-slateDark hover:bg-slate-800 text-white font-semibold py-3 px-6 rounded-xl shadow transition-all">
+                <div class="flex items-center space-x-3">
+                    <button onclick="app.goBack(2)" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-3 px-5 rounded-xl transition-all border border-slate-300 text-sm cursor-pointer">
+                        Back
+                    </button>
+                    <button onclick="app.completeStage2()" class="flex-grow bg-slateDark hover:bg-slate-800 text-white font-semibold py-3 px-6 rounded-xl shadow transition-all text-sm cursor-pointer">
                         I Acknowledge & Understand Threat Risks — Proceed to MFA Selection
                     </button>
                 </div>
@@ -184,13 +197,22 @@
             <!-- STAGE 3: Secondary Factor Selection (Decision Gate & Structural Nudges) -->
             <div id="stage-3" class="p-6 sm:p-8 space-y-6 hidden">
                 <div>
-                    <h2 class="text-xl font-bold text-slateDark">Select Multi-Factor Authentication (MFA)</h2>
-                    <p class="text-sm text-slate-500">Choose your preferred secondary security factor to complete account hardening.</p>
+                    <h2 class="text-xl font-bold text-slateDark">Select Two-Factor Authentication (2FA)</h2>
+                    <p class="text-sm text-slate-500">Choose your preferred secondary security method to protect your account.</p>
                 </div>
 
                 <!-- MFA Options Container -->
                 <div id="mfa-options-list" class="space-y-3">
                     <!-- Dynamically rendered based on structural nudge condition -->
+                </div>
+
+                <div class="pt-4 flex justify-between items-center">
+                    <button onclick="app.goBack(3)" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-2.5 px-5 rounded-xl transition-all border border-slate-300 text-sm cursor-pointer">
+                        Back
+                    </button>
+                    <button id="mfa-continue-btn" onclick="app.submitStage3Selection()" disabled class="bg-slate-300 text-slate-500 font-semibold py-2.5 px-6 rounded-xl shadow-sm cursor-not-allowed transition-all">
+                        Confirm Selection & Continue
+                    </button>
                 </div>
             </div>
 
@@ -219,10 +241,10 @@
                 </div>
 
                 <div class="pt-2 flex justify-center space-x-3">
-                    <button onclick="app.openTelemetryModal()" class="bg-cyan-600 hover:bg-cyan-700 text-white text-sm font-semibold py-2.5 px-5 rounded-lg shadow transition-all">
+                    <button onclick="app.openTelemetryModal()" class="bg-cyan-600 hover:bg-cyan-700 text-white text-sm font-semibold py-2.5 px-5 rounded-lg shadow transition-all cursor-pointer">
                         View & Export Experiment Dataset
                     </button>
-                    <button onclick="app.resetExperiment()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 text-sm font-semibold py-2.5 px-5 rounded-lg transition-all">
+                    <button onclick="app.resetExperiment()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 text-sm font-semibold py-2.5 px-5 rounded-lg transition-all cursor-pointer">
                         Run New Participant
                     </button>
                 </div>
@@ -231,29 +253,20 @@
         </div>
     </main>
 
-    <!-- SMS Confirmation Modal (Asymmetric Friction Nudge) -->
-    <div id="sms-modal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-        <div class="bg-white rounded-xl shadow-2xl max-w-md w-full p-6 space-y-4 border border-slate-200 animate-in fade-in zoom-in duration-150">
-            <div class="flex items-center space-x-3 text-amber-600">
-                <svg class="w-6 h-6 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-                <h3 class="text-base font-bold text-slateDark">SMS-OTP Risk Acknowledgement Required</h3>
+    <!-- Simulated Enrolment Dialog Modal -->
+    <div id="enrolment-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 space-y-4 border border-slate-200 text-center">
+            <div id="enrolment-modal-icon" class="w-12 h-12 bg-cyan-100 text-cyan-700 rounded-full flex items-center justify-center mx-auto">
+                <svg class="w-6 h-6 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
             </div>
-            <p class="text-xs text-slate-600 leading-relaxed">
-                You have selected <strong>SMS-OTP</strong>. As highlighted in security advisories, phone numbers are not cryptographically bound to physical hardware, making SMS vulnerable to SIM-swapping interception.
-            </p>
-            <div class="bg-amber-50 p-3 rounded-lg border border-amber-200 flex items-start space-x-2">
-                <input type="checkbox" id="sms-ack-checkbox" onchange="app.toggleSmsConfirmButton(this.checked)" class="mt-0.5 rounded border-amber-300 text-amber-600 focus:ring-amber-500">
-                <label for="sms-ack-checkbox" class="text-xs text-amber-900 font-medium select-none cursor-pointer">
-                    I explicitly acknowledge the risk of SIM-swapping interception and choose to proceed with SMS-OTP despite lower security resilience.
-                </label>
+            <div class="space-y-1">
+                <h3 id="enrolment-modal-title" class="text-lg font-bold text-slateDark">Setting up Passkey...</h3>
+                <p id="enrolment-modal-desc" class="text-xs text-slate-600">Please verify with TouchID, Windows Hello or your security key.</p>
             </div>
-            <div class="flex justify-end space-x-2 pt-2">
-                <button onclick="app.closeSmsModal()" class="px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-100 rounded-lg transition-all">
-                    Cancel & Choose Secure Option
-                </button>
-                <button id="sms-confirm-btn" onclick="app.confirmSmsSelection()" disabled class="px-4 py-2 text-xs font-semibold bg-slate-300 text-slate-500 rounded-lg cursor-not-allowed transition-all">
-                    Confirm SMS Selection
-                </button>
+            <div class="pt-2">
+                <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                    <div id="enrolment-progress-bar" class="bg-cyan-600 h-full w-0 transition-all duration-1000"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -266,7 +279,7 @@
                     <svg class="w-5 h-5 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
                     <h3 class="text-base font-bold text-slateDark">Telemetry & Behavioural Dataset</h3>
                 </div>
-                <button onclick="app.closeTelemetryModal()" class="text-slate-400 hover:text-slate-600">
+                <button onclick="app.closeTelemetryModal()" class="text-slate-400 hover:text-slate-600 cursor-pointer">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                 </button>
             </div>
@@ -280,15 +293,15 @@
                     Export dataset in CSV or JSON format for SPSS / R analysis.
                 </div>
                 <div class="flex space-x-2 w-full sm:w-auto">
-                    <button onclick="app.exportCSV()" class="flex-1 sm:flex-none bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs py-2 px-4 rounded-lg shadow transition-all flex items-center justify-center space-x-1">
+                    <button onclick="app.exportCSV()" class="flex-1 sm:flex-none bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs py-2 px-4 rounded-lg shadow transition-all flex items-center justify-center space-x-1 cursor-pointer">
                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                         <span>Export CSV</span>
                     </button>
-                    <button onclick="app.exportJSON()" class="flex-1 sm:flex-none bg-cyan-600 hover:bg-cyan-700 text-white font-semibold text-xs py-2 px-4 rounded-lg shadow transition-all flex items-center justify-center space-x-1">
+                    <button onclick="app.exportJSON()" class="flex-1 sm:flex-none bg-cyan-600 hover:bg-cyan-700 text-white font-semibold text-xs py-2 px-4 rounded-lg shadow transition-all flex items-center justify-center space-x-1 cursor-pointer">
                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                         <span>Export JSON</span>
                     </button>
-                    <button onclick="app.clearLogs()" class="bg-rose-50 hover:bg-rose-100 text-rose-700 font-semibold text-xs py-2 px-3 rounded-lg border border-rose-200 transition-all">
+                    <button onclick="app.clearLogs()" class="bg-rose-50 hover:bg-rose-100 text-rose-700 font-semibold text-xs py-2 px-3 rounded-lg border border-rose-200 transition-all cursor-pointer">
                         Clear Logs
                     </button>
                 </div>
@@ -305,22 +318,43 @@
     <script>
         class MFAExperimentApp {
             constructor() {
-                this.assignmentMode = 'random'; // 'random' or 'manual'
-                this.currentGroup = 1; // 1: Baseline, 2: Info Only, 3: Structural Only, 4: Hybrid
-                this.currentStage = 1; // 1, 2, 3, 4
+                this.assignmentMode = 'random';
+                this.currentGroup = Math.floor(Math.random() * 4) + 1;
+                this.currentStage = 1;
                 this.startTime = null;
                 this.timerInterval = null;
                 this.telemetryLogs = this.loadLogs();
+                this.participantId = 'P_' + Math.random().toString(36).substring(2, 9);
+                this.selectedMethod = null;
                 this.sessionData = {
-                    participantId: 'P_' + Math.random().toString(36).substring(2, 9),
-                    group: 1,
+                    participantId: this.participantId,
+                    group: this.currentGroup,
                     infoNudgePresent: false,
                     structuralNudgesPresent: false,
                     selectedMethod: null,
                     decisionLatencySeconds: 0,
                     timestamp: null
                 };
+                
+                this.parseUrlParameters();
                 this.updateLogCount();
+                this.updateGroupUI();
+            }
+
+            parseUrlParameters() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const groupParam = urlParams.get('group');
+                const idParam = urlParams.get('id') || urlParams.get('participant_id');
+
+                if (idParam) {
+                    this.participantId = idParam;
+                    this.sessionData.participantId = idParam;
+                }
+
+                if (groupParam && [1, 2, 3, 4].includes(parseInt(groupParam))) {
+                    this.currentGroup = parseInt(groupParam);
+                    this.assignmentMode = 'external';
+                }
             }
 
             loadLogs() {
@@ -344,76 +378,26 @@
                 if (countEl) countEl.innerText = this.telemetryLogs.length;
             }
 
-            setMode(mode) {
-                this.assignmentMode = mode;
-                const btnRandom = document.getElementById('mode-random');
-                const btnManual = document.getElementById('mode-manual');
-                const manualContainer = document.getElementById('manual-selector-container');
-
-                if(mode === 'random') {
-                    btnRandom.className = 'py-2 px-3 text-sm font-medium rounded-lg border border-cyan-600 bg-cyan-600 text-white transition-all shadow-sm';
-                    btnManual.className = 'py-2 px-3 text-sm font-medium rounded-lg border border-slate-300 bg-white text-slate-700 hover:bg-slate-50 transition-all';
-                    manualContainer.classList.add('opacity-50', 'pointer-events-none');
-                    this.assignRandomGroup();
-                } else {
-                    btnManual.className = 'py-2 px-3 text-sm font-medium rounded-lg border border-cyan-600 bg-cyan-600 text-white transition-all shadow-sm';
-                    btnRandom.className = 'py-2 px-3 text-sm font-medium rounded-lg border border-slate-300 bg-white text-slate-700 hover:bg-slate-50 transition-all';
-                    manualContainer.classList.remove('opacity-50', 'pointer-events-none');
-                    this.changeManualGroup(document.getElementById('manual-group-select').value);
-                }
-            }
-
-            assignRandomGroup() {
-                const group = Math.floor(Math.random() * 4) + 1;
-                this.currentGroup = group;
-                const selectEl = document.getElementById('manual-group-select');
-                if (selectEl) selectEl.value = group;
-                this.updateGroupUI();
-            }
-
-            changeManualGroup(val) {
-                this.currentGroup = parseInt(val);
-                this.updateGroupUI();
-            }
-
             updateGroupUI() {
-                const badge = document.getElementById('current-group-badge');
-                const infoDesc = document.getElementById('condition-desc-info');
-                const structDesc = document.getElementById('condition-desc-struct');
-
-                if(!badge) return;
+                const debugText = document.getElementById('debug-group-text');
+                if(!debugText) return;
 
                 const groupNames = {
-                    1: "Group 1: Baseline Control",
-                    2: "Group 2: Info Nudge Only",
-                    3: "Group 3: Structural Nudges Only",
-                    4: "Group 4: Hybrid Condition"
+                    1: "Group 1: Baseline Control (No Info, No Structure)",
+                    2: "Group 2: Info Nudge Only (Risk Priming active)",
+                    3: "Group 3: Structural Nudges Only (Defaults & Salience)",
+                    4: "Group 4: Hybrid Condition (Info + Structure)"
                 };
 
-                badge.innerText = groupNames[this.currentGroup];
-
-                if(this.currentGroup === 1) {
-                    infoDesc.innerHTML = `<span class="font-medium">Information Nudge:</span> Absent (Proceeds directly to MFA)`;
-                    structDesc.innerHTML = `<span class="font-medium">Structural Nudges:</span> Absent (Standard un-prioritised options, SMS easily selectable)`;
-                } else if(this.currentGroup === 2) {
-                    infoDesc.innerHTML = `<span class="font-medium">Information Nudge:</span> Present (SIM-swapping threat disclosure shown prior to MFA)`;
-                    structDesc.innerHTML = `<span class="font-medium">Structural Nudges:</span> Absent (Standard un-prioritised options, SMS easily selectable)`;
-                } else if(this.currentGroup === 3) {
-                    infoDesc.innerHTML = `<span class="font-medium">Information Nudge:</span> Absent (Proceeds directly to MFA)`;
-                    structDesc.innerHTML = `<span class="font-medium">Structural Nudges:</span> Present (Passkeys/TOTP highlighted, Passkey default pre-selected, SMS asymmetric friction modal)`;
-                } else if(this.currentGroup === 4) {
-                    infoDesc.innerHTML = `<span class="font-medium">Information Nudge:</span> Present (SIM-swapping threat disclosure shown prior to MFA)`;
-                    structDesc.innerHTML = `<span class="font-medium">Structural Nudges:</span> Present (Passkeys/TOTP highlighted, Passkey default pre-selected, SMS asymmetric friction modal)`;
-                }
+                debugText.innerText = groupNames[this.currentGroup];
+                this.sessionData.group = this.currentGroup;
+                this.sessionData.infoNudgePresent = (this.currentGroup === 2 || this.currentGroup === 4);
+                this.sessionData.structuralNudgesPresent = (this.currentGroup === 3 || this.currentGroup === 4);
             }
 
             startExperiment() {
-                if(this.assignmentMode === 'random') {
-                    this.assignRandomGroup();
-                }
-
                 this.sessionData = {
-                    participantId: 'P_' + Math.random().toString(36).substring(2, 9),
+                    participantId: this.participantId,
                     group: this.currentGroup,
                     infoNudgePresent: (this.currentGroup === 2 || this.currentGroup === 4),
                     structuralNudgesPresent: (this.currentGroup === 3 || this.currentGroup === 4),
@@ -442,10 +426,10 @@
                 const title = document.getElementById('step-title');
 
                 const stageInfo = {
-                    1: { badge: "Stage 1 of 4", title: "Primary Authentication" },
-                    2: { badge: "Stage 2 of 4", title: "Information Nudge (Risk Priming)" },
-                    3: { badge: "Stage 3 of 4", title: "Secondary Factor Selection" },
-                    4: { badge: "Stage 4 of 4", title: "Enrolment Completion" }
+                    1: { badge: "Step 1 of 4", title: "Account Registration" },
+                    2: { badge: "Step 2 of 4", title: "Security Notice (Risk Disclosure)" },
+                    3: { badge: "Step 3 of 4", title: "2FA Selection" },
+                    4: { badge: "Step 4 of 4", title: "Registration Completed" }
                 };
 
                 badge.innerText = stageInfo[stageNum].badge;
@@ -478,6 +462,31 @@
 
             submitStage1(e) {
                 e.preventDefault();
+                const emailInput = document.getElementById('email-input').value.trim();
+                const passInput = document.getElementById('password-input').value;
+                const confirmInput = document.getElementById('password-confirm-input').value;
+                
+                const emailError = document.getElementById('email-error');
+                const passError = document.getElementById('password-error');
+
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(emailInput)) {
+                    emailError.classList.remove('hidden');
+                    return;
+                } else {
+                    emailError.classList.add('hidden');
+                }
+
+                const passValid = passInput.length >= 10 && /\d/.test(passInput) && /[!@#$%^&*(),.?":{}|<>]/.test(passInput);
+                const passMatch = passInput === confirmInput;
+
+                if (!passValid || !passMatch) {
+                    passError.classList.remove('hidden');
+                    return;
+                } else {
+                    passError.classList.add('hidden');
+                }
+
                 if(this.sessionData.infoNudgePresent) {
                     this.goToStage(2);
                 } else {
@@ -489,18 +498,37 @@
                 this.goToStage(3);
             }
 
+            goBack(currentStage) {
+                if(currentStage === 1) {
+                    this.resetExperiment();
+                } else if(currentStage === 2) {
+                    this.goToStage(1);
+                } else if(currentStage === 3) {
+                    if(this.sessionData.infoNudgePresent) {
+                        this.goToStage(2);
+                    } else {
+                        this.goToStage(1);
+                    }
+                }
+            }
+
             renderMfaOptions() {
                 const container = document.getElementById('mfa-options-list');
                 if(!container) return;
                 container.innerHTML = '';
 
+                this.selectedMethod = null;
+                const continueBtn = document.getElementById('mfa-continue-btn');
+                continueBtn.disabled = true;
+                continueBtn.className = "bg-slate-300 text-slate-500 font-semibold py-2.5 px-6 rounded-xl shadow-sm cursor-not-allowed transition-all";
+
                 const hasStructural = this.sessionData.structuralNudgesPresent;
 
                 let methods = [
-                    { id: 'passkey', name: 'FIDO2 Passkeys', desc: 'Hardware-backed biometric or security key authentication. Highly secure and phishing-proof.', resilience: 'High', recommended: true },
-                    { id: 'totp', name: 'App-based TOTP', desc: 'Google Authenticator, Authy, or Microsoft Authenticator app codes. Secure against interception.', resilience: 'High', recommended: true },
-                    { id: 'push', name: 'Push Notifications', desc: 'Instant approval notification sent to your trusted mobile device app.', resilience: 'Medium', recommended: false },
-                    { id: 'sms', name: 'SMS-OTP', desc: '6-digit verification code delivered via SMS text message to your mobile number.', resilience: 'Low (Vulnerable to SIM-swapping)', recommended: false }
+                    { id: 'passkey', name: 'FIDO2 Passkeys', desc: 'Hardware-bound cryptographic keys. Extremely secure, phishing-resistant, and single-touch biometrics.', resilience: 'High', recommended: true },
+                    { id: 'totp', name: 'App-based TOTP', desc: 'Google Authenticator, Microsoft Authenticator or Authy codes generated offline.', resilience: 'High', recommended: true },
+                    { id: 'push', name: 'Push Notification (with Number Matching)', desc: 'Encrypted push alerts via APNs/FCM delivering real-time prompts to your enrolled mobile app.', resilience: 'Medium', recommended: false },
+                    { id: 'sms', name: 'SMS-OTP (Text Message)', desc: '6-digit verification code sent via telecom SMS. Vulnerable to SIM-swapping interception.', resilience: 'Low (Vulnerable to SIM-swapping)', recommended: false }
                 ];
 
                 if(hasStructural) {
@@ -527,83 +555,95 @@
                     }
 
                     card.className = baseClasses;
-                    card.onclick = () => this.selectMfaMethod(m.id);
-
-                    let badgeHtml = '';
-                    if(hasStructural && m.recommended) {
-                        badgeHtml = `<span class="bg-cyan-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider ml-2">Recommended</span>`;
-                    } else if(hasStructural && m.id === 'sms') {
-                        badgeHtml = `<span class="bg-rose-100 text-rose-800 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider ml-2">Legacy / Low Security</span>`;
-                    }
+                    
+                    const radioId = `radio_${m.id}`;
+                    
+                    const resilienceBadgeHtml = hasStructural ? `
+                        <div class="text-xs font-semibold px-2.5 py-1 rounded-lg self-center flex-shrink-0 ml-2 ${m.resilience.startsWith('High') ? 'bg-emerald-100 text-emerald-800' : (m.resilience.startsWith('Medium') ? 'bg-amber-100 text-amber-800' : 'bg-rose-100 text-rose-800')}">
+                            ${m.resilience}
+                        </div>
+                    ` : '';
 
                     card.innerHTML = `
-                        <div class="flex items-start space-x-3">
+                        <div class="flex items-start space-x-3 w-full">
                             <div class="mt-1">
-                                <input type="radio" name="mfa_choice" ${isDefault ? 'checked' : ''} class="mt-0.5 text-cyan-600 focus:ring-cyan-500">
+                                <input type="radio" id="${radioId}" name="mfa_choice" value="${m.id}" ${isDefault ? 'checked' : ''} class="mt-0.5 text-cyan-600 focus:ring-cyan-500 cursor-pointer">
                             </div>
-                            <div>
+                            <div class="flex-grow cursor-pointer" onclick="app.selectMfaMethod('${m.id}')">
                                 <div class="flex items-center">
                                     <span class="font-bold text-sm text-slateDark">${m.name}</span>
-                                    ${badgeHtml}
+                                    ${hasStructural && m.recommended ? '<span class="bg-cyan-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider ml-2">Recommended</span>' : ''}
+                                    ${hasStructural && m.id === 'sms' ? '<span class="bg-rose-100 text-rose-800 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider ml-2">Legacy / Low Security</span>' : ''}
                                 </div>
                                 <p class="text-xs text-slate-600 mt-1">${m.desc}</p>
                             </div>
                         </div>
-                        <div class="text-xs font-semibold px-2.5 py-1 rounded-lg ${m.resilience.startsWith('High') ? 'bg-emerald-100 text-emerald-800' : (m.resilience.startsWith('Medium') ? 'bg-amber-100 text-amber-800' : 'bg-rose-100 text-rose-800')}">
-                            ${m.resilience}
-                        </div>
+                        ${resilienceBadgeHtml}
                     `;
+
+                    card.onclick = (e) => {
+                        if(e.target.tagName !== 'INPUT') {
+                            document.getElementById(radioId).checked = true;
+                        }
+                        this.selectMfaMethod(m.id);
+                    };
+
                     container.appendChild(card);
                 });
 
-                const confirmDiv = document.createElement('div');
-                confirmDiv.className = "pt-4 flex justify-end";
-                confirmDiv.innerHTML = `
-                    <button onclick="app.submitStage3Selection()" class="bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-2.5 px-6 rounded-xl shadow transition-all">
-                        Complete Enrolment with Selected Method
-                    </button>
-                `;
-                container.appendChild(confirmDiv);
+                if(hasStructural) {
+                    this.selectMfaMethod('passkey');
+                }
             }
 
             selectMfaMethod(methodId) {
                 this.pendingMethod = methodId;
-                const hasStructural = this.sessionData.structuralNudgesPresent;
-                
-                if(hasStructural && methodId === 'sms') {
-                    document.getElementById('sms-modal').classList.remove('hidden');
-                    document.getElementById('sms-ack-checkbox').checked = false;
-                    document.getElementById('sms-confirm-btn').disabled = true;
-                    document.getElementById('sms-confirm-btn').className = "px-4 py-2 text-xs font-semibold bg-slate-300 text-slate-500 rounded-lg cursor-not-allowed transition-all";
-                } else {
-                    this.finalizeMfaSelection(methodId);
-                }
+                const continueBtn = document.getElementById('mfa-continue-btn');
+                continueBtn.disabled = false;
+                continueBtn.className = "bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-2.5 px-6 rounded-xl shadow transition-all cursor-pointer";
+
+                const radios = document.querySelectorAll('input[name="mfa_choice"]');
+                radios.forEach(r => {
+                    if(r.value === methodId) r.checked = true;
+                });
             }
 
             submitStage3Selection() {
-                const hasStructural = this.sessionData.structuralNudgesPresent;
-                const defaultMethod = hasStructural ? 'passkey' : 'sms';
-                this.finalizeMfaSelection(this.pendingMethod || defaultMethod);
+                if(!this.pendingMethod) return;
+                
+                // Trigger realistic enrolment simulation step
+                this.simulateEnrolment(this.pendingMethod, () => {
+                    this.finalizeMfaSelection(this.pendingMethod);
+                });
             }
 
-            toggleSmsConfirmButton(checked) {
-                const btn = document.getElementById('sms-confirm-btn');
-                if(checked) {
-                    btn.disabled = false;
-                    btn.className = "px-4 py-2 text-xs font-semibold bg-rose-600 hover:bg-rose-700 text-white rounded-lg shadow transition-all cursor-pointer";
-                } else {
-                    btn.disabled = true;
-                    btn.className = "px-4 py-2 text-xs font-semibold bg-slate-300 text-slate-500 rounded-lg cursor-not-allowed transition-all";
-                }
-            }
+            simulateEnrolment(methodId, callback) {
+                const modal = document.getElementById('enrolment-modal');
+                const title = document.getElementById('enrolment-modal-title');
+                const desc = document.getElementById('enrolment-modal-desc');
+                const progressBar = document.getElementById('enrolment-progress-bar');
+                
+                const configs = {
+                    'passkey': { title: 'Setting up FIDO2 Passkey...', desc: 'Please verify with TouchID, Windows Hello or your security key hardware.' },
+                    'totp': { title: 'Configuring Authenticator App...', desc: 'Scanning shared secret QR code & validating initial 6-digit TOTP token.' },
+                    'push': { title: 'Binding Mobile Push Channel...', desc: 'Connecting APNs/FCM device token for number-matching push notifications.' },
+                    'sms': { title: 'Registering SMS Gateway...', desc: 'Verifying recipient phone number via carrier telecom route.' }
+                };
 
-            closeSmsModal() {
-                document.getElementById('sms-modal').classList.add('hidden');
-            }
+                const cfg = configs[methodId] || { title: 'Finalizing Enrolment...', desc: 'Please wait while we secure your account.' };
+                title.innerText = cfg.title;
+                desc.innerText = cfg.desc;
+                progressBar.style.width = '0%';
+                modal.classList.remove('hidden');
 
-            confirmSmsSelection() {
-                document.getElementById('sms-modal').classList.add('hidden');
-                this.finalizeMfaSelection('sms');
+                // Animate progress bar
+                setTimeout(() => { progressBar.style.width = '70%'; }, 200);
+                setTimeout(() => { progressBar.style.width = '100%'; }, 900);
+
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                    callback();
+                }, 1400);
             }
 
             finalizeMfaSelection(methodId) {
@@ -617,7 +657,7 @@
                 const methodNames = {
                     'passkey': 'FIDO2 Passkeys',
                     'totp': 'App-based TOTP',
-                    'push': 'Push Notifications',
+                    'push': 'Push Notification (Number Matching)',
                     'sms': 'SMS-OTP'
                 };
 
@@ -625,6 +665,17 @@
                 document.getElementById('telemetry-summary-group').innerText = `Group ${this.sessionData.group}`;
                 document.getElementById('telemetry-summary-method').innerText = methodNames[methodId] || methodId;
                 document.getElementById('telemetry-summary-latency').innerText = `${latency}s`;
+
+                const urlParams = new URLSearchParams(window.location.search);
+                const returnUrl = urlParams.get('return_url');
+                if (returnUrl) {
+                    const separator = returnUrl.includes('?') ? '&' : '?';
+                    const redirectFinal = `${returnUrl}${separator}group=${this.sessionData.group}&method=${this.sessionData.selectedMethod}&latency=${latency}&id=${this.sessionData.participantId}`;
+                    
+                    setTimeout(() => {
+                        window.location.href = redirectFinal;
+                    }, 4000);
+                }
 
                 this.goToStage(4);
             }
@@ -639,60 +690,64 @@
             }
 
             clearLogs() {
-                if(confirm("Are you sure you want to clear all recorded telemetry logs for this browser session?")) {
+                if(confirm("Are you sure you want to clear all recorded telemetry logs for this session?")) {
                     this.telemetryLogs = [];
                     this.saveLogs();
                     this.openTelemetryModal();
                 }
             }
 
-            exportJSON() {
-                const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this.telemetryLogs, null, 2));
-                const dlAnchor = document.createElement('a');
-                dlAnchor.setAttribute("href", dataStr);
-                dlAnchor.setAttribute("download", `mfa_experiment_telemetry_${Date.now()}.json`);
-                document.body.appendChild(dlAnchor);
-                dlAnchor.click();
-                dlAnchor.remove();
-            }
-
             exportCSV() {
-                if(this.telemetryLogs.length === 0) {
+                if (this.telemetryLogs.length === 0) {
                     alert("No telemetry records available to export.");
                     return;
                 }
-
                 const headers = ["participantId", "group", "infoNudgePresent", "structuralNudgesPresent", "selectedMethod", "decisionLatencySeconds", "timestamp"];
-                let csvContent = headers.join(",") + "\n";
-
+                let csv = headers.join(",") + "\n";
                 this.telemetryLogs.forEach(row => {
-                    const values = headers.map(h => {
-                        let val = row[h];
-                        return typeof val === 'string' ? `"${val}"` : val;
-                    });
-                    csvContent += values.join(",") + "\n";
+                    csv += headers.map(h => `"${row[h] !== undefined ? row[h] : ''}"`).join(",") + "\n";
                 });
-
-                const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+                const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
                 const url = URL.createObjectURL(blob);
-                const dlAnchor = document.createElement('a');
-                dlAnchor.setAttribute("href", url);
-                dlAnchor.setAttribute("download", `mfa_experiment_telemetry_${Date.now()}.csv`);
-                document.body.appendChild(dlAnchor);
-                dlAnchor.click();
-                dlAnchor.remove();
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `mfa_experiment_dataset_${new Date().toISOString().slice(0,10)}.csv`;
+                a.click();
+            }
+
+            exportJSON() {
+                if (this.telemetryLogs.length === 0) {
+                    alert("No telemetry records available to export.");
+                    return;
+                }
+                const blob = new Blob([JSON.stringify(this.telemetryLogs, null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `mfa_experiment_dataset_${new Date().toISOString().slice(0,10)}.json`;
+                a.click();
             }
 
             resetExperiment() {
-                this.startTime = null;
                 if(this.timerInterval) clearInterval(this.timerInterval);
+                this.currentStage = 1;
+                this.startTime = null;
+                this.selectedMethod = null;
+                if(this.assignmentMode === 'random') {
+                    this.currentGroup = Math.floor(Math.random() * 4) + 1;
+                }
+                this.updateGroupUI();
+
                 document.getElementById('workflow-container').classList.add('hidden');
                 document.getElementById('setup-card').classList.remove('hidden');
             }
         }
 
-        // Initialize global app instance immediately so inline onclick handlers can reference it
         const app = new MFAExperimentApp();
     </script>
 </body>
 </html>
+```
+
+### Kurze Rückfrage:
+Siehst du den simulierten Enrolment-Dialog jetzt, wenn du in der Web-Vorschau eine Methode auswählst und auf *Confirm Selection* klickst? (Das Modal blendet sich für 1,4 Sekunden ein, simuliert die Einrichtung und leitet dann sauber zur Abschlussseite weiter).
